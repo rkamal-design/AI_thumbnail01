@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Diffusion Thumbnail Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">YouTube AI Studio</p>
+      <h1>Create an AI thumbnail from any YouTube link</h1>
+      <p class="subhead">We pull the video title, craft a diffusion prompt, and generate a branded thumbnail with captions.</p>
+      <ol class="how-to">
+        <li>Paste a YouTube video URL.</li>
+        <li>Add your Hugging Face access token.</li>
+        <li>Click “Generate thumbnail” and download the result.</li>
+      </ol>
+    </header>
+
+    <section class="card">
+      <label class="field">
+        <span>YouTube video link</span>
+        <input id="youtube-url" type="url" placeholder="https://www.youtube.com/watch?v=VIDEO_ID" autocomplete="off" />
+      </label>
+
+      <div class="field-group">
+        <label class="field">
+          <span>Caption text</span>
+          <input id="caption-text" type="text" placeholder="Generated from the video title" autocomplete="off" />
+        </label>
+        <label class="field">
+          <span>Caption style</span>
+          <select id="caption-style">
+            <option value="bold">Bold lower third</option>
+            <option value="center">Centered banner</option>
+            <option value="outlined">Outlined headline</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Hugging Face access token (required for diffusion)</span>
+        <input id="hf-token" type="password" placeholder="hf_..." autocomplete="off" />
+      </label>
+
+      <label class="field">
+        <span>Diffusion prompt (auto-generated)</span>
+        <textarea id="prompt" rows="3" readonly></textarea>
+      </label>
+
+      <div class="actions">
+        <button id="generate" type="button">Generate thumbnail</button>
+        <button id="clear" type="button" class="ghost">Clear</button>
+      </div>
+
+      <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="preview" aria-live="polite">
+      <div class="preview-header">
+        <h2>Preview</h2>
+        <a id="download-link" class="download" href="#" download>Download image</a>
+      </div>
+      <div class="preview-body">
+        <canvas id="thumbnail" width="1280" height="720" aria-label="Generated thumbnail preview"></canvas>
+        <div id="empty-state" class="empty">
+          <p>Paste a YouTube link and generate a diffusion thumbnail.</p>
+        </div>
+      </div>
+      <p class="hint">Tip: provide your own caption to tweak the final overlay.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
